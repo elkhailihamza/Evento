@@ -25,6 +25,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/register', 'showRegister')->name('register');
     Route::post('/login/send', 'login')->name('login.send');
     Route::post('/register/send', 'register')->name('register.send');
+    Route::post('/logout', 'logout')->name('logout')->middleware('auth');
 });
 
 Route::middleware('auth')->group(function () {
