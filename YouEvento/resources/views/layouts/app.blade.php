@@ -9,8 +9,9 @@
     <title>Document</title>
 </head>
 
-<body style="height: 100vh;">
+<body>
     @include('layouts.navbar')
+    @include('layouts.sidebar')
     @yield('content')
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
