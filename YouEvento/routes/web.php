@@ -23,6 +23,8 @@ Route::get('/', function () {
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'showLogin')->name('login');
     Route::get('/register', 'showRegister')->name('register');
+    Route::get('/forgotten', 'showForgotten')->name('forgotten');
+    Route::post('/forgotten/send', 'forgotten')->name('forgotten.send');
     Route::post('/login/send', 'login')->name('login.send');
     Route::post('/register/send', 'register')->name('register.send');
     Route::post('/logout', 'logout')->name('logout')->middleware('auth');

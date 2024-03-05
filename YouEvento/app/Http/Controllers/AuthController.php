@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use App\Mail\ForgotPassMail;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -56,6 +58,30 @@ class AuthController extends Controller
                 'error' => $e->errors(),
             ]);
         }
+    }
+    public function showForgotten()
+    {
+        return view('auth.forgotten_password.forgot');
+    }
+    public function forgotten(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        try {
+            $this->sendMail($request->input('email'));
+            return 'Email sent successfully!';
+        } catch (\Exception $e) {
+            return 'Error: ' . $e->getMessage();
+        }
+    }
+    public function sendMail($address)
+    {
+        $email = new ForgotPassMail();
+        Mail::to($address)->send($email);
+
+        return 'Email sent successfully!';
     }
     public function logout(Request $request)
     {
