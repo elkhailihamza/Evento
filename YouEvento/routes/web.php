@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,11 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'showLogin')->name('login');
     Route::get('/register', 'showRegister')->name('register');
@@ -33,5 +29,8 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware('auth')->group(function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('/', 'index')->name('index');
+    });
+    Route::controller(EventController::class)->group(function() {
+        Route::get('/events', 'index')->name('events');
     });
 });
