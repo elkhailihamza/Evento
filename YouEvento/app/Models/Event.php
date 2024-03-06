@@ -15,5 +15,6 @@ class Event extends Model
         'location',
         'date',
         'seats',
+        'category_id'
     ];
 }
