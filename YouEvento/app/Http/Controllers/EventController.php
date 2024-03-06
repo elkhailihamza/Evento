@@ -12,12 +12,10 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::get();
-        $categories = Category::get();
-        return view('events', compact('events', 'categories'));
+        return view('events', compact('events'));
     }
     public function store(Request $request)
     {
-        // dd($request);
         try {
             $data = $request->validate([
                 'title' => 'required|string|max:255',
@@ -26,21 +24,29 @@ class EventController extends Controller
                 'location' => 'required|string|max:255',
                 'date' => 'required|date_format:Y-m-d\TH:i',
                 'seats' => 'required|integer|min:1',
-                'category_id' => 'required|integer',
             ]);
 
+            $data['category_id'] = $request->input('category');
             $imagePath = $request->file('cover')->store('uploads', 'public');
             $data['cover'] = $imagePath;
 
-            Event::create($data);
+            $event = Event::create($data);
 
-            return redirect(route('index'));
-
+            return response()->json([
+                'message' => 'Event Created!',
+                'event' => $event,
+            ]);
         } catch(ValidationException $e) {
             return response()->json([
                 'message' => 'Event Store Error!',
                 'error' => $e->errors(),
             ]);
         }
+    }
+    public function getEvents() {
+        $events = Event::get();
+        return response()->json([
+            compact('events')
+        ]);
     }
 }

@@ -16,6 +16,7 @@
     @yield('content')
 </body>
 @vite('resources/js/categories.js')
+@vite('resources/js/fetchEvents.js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 

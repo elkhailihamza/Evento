@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(EventController::class)->group(function() {
         Route::get('/events', 'index')->name('events');
+        Route::get('/events/get', 'getEvents');
         Route::post('/events/store', 'store')->name('events.store');
     });
     Route::controller(CategoryController::class)->group(function() {
