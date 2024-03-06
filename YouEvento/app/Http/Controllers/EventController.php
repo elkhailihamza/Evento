@@ -32,10 +32,7 @@ class EventController extends Controller
 
             $event = Event::create($data);
 
-            return response()->json([
-                'message' => 'Event Created!',
-                'event' => $event,
-            ]);
+            return redirect(back());
         } catch(ValidationException $e) {
             return response()->json([
                 'message' => 'Event Store Error!',

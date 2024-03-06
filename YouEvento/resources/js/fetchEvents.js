@@ -13,7 +13,7 @@ function fetchCategories() {
         url: "/events/get",
         type: "GET",
         success: function (data) {
-            fetchedEvents.set('true');
+            fetchedEvents.set("true");
             appendEvents(data[0].events);
         },
         error: function (error) {
@@ -26,9 +26,9 @@ function generateEventHtml(event) {
     var date = new Date(event.created_at);
     var formattedDate = date.toLocaleString();
     var eventHtml = `
-        <div class="w-full rounded-md border p-2">
-            <div class="mb-3">
-                <img src="storage/${event.cover}" alt="'${event.title}' Img Cover">
+        <div class="w-full rounded-md border p-2 mb-4">
+            <div class="flex justify-center mb-3">
+            <img src="storage/${event.cover}" alt="'${event.title}' Img Cover" onerror="$(this).attr('src', 'storage/images/thumbnail.png')">
             </div>
             <div>
                 <h2 class="truncate">Title: ${event.title}</h2>
@@ -37,10 +37,10 @@ function generateEventHtml(event) {
         </div>
         <hr>
     `;
-    return eventHtml
+    return eventHtml;
 }
 
 function appendEvents(events) {
-    var eventHTML = events.map(generateEventHtml).join('');
-    $('#events').append(eventHTML);
+    var eventHTML = events.map(generateEventHtml).join("");
+    $("#events").append(eventHTML);
 }
