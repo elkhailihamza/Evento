@@ -33,7 +33,7 @@ class EventController extends Controller
             $imagePath = $request->file('cover')->store('uploads', 'public');
             $data['cover'] = $imagePath;
 
-            $event = Event::create($data);
+            Event::create($data);
 
             return redirect()->back();
         } catch (ValidationException $e) {
@@ -47,7 +47,7 @@ class EventController extends Controller
     {
         $events = Event::get();
         return response()->json([
-            compact('events')
+            compact('events'),
         ]);
     }
     public function search(Request $request)

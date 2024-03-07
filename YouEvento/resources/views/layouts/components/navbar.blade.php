@@ -41,7 +41,7 @@
 </nav>
 
 <div class="text-center flex justify-end position-absolute">
-    <button id="getEvents" data-drawer-backdrop="false" class="text-white font-medium text-sm mt-2 me-2 focus:outline-none" type="button" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
+    <button id="getEvents" data-drawer-backdrop="false" class="text-white font-medium text-sm mt-2 me-2 focus:outline-none" type="button" data-drawer-target="right-sidebar" data-drawer-show="right-sidebar" data-drawer-placement="right" aria-controls="right-sidebar">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 12H6M12 5l-7 7 7 7" />
         </svg>

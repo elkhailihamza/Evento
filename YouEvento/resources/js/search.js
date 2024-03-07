@@ -54,10 +54,10 @@ function createEventHtml(event) {
     var date = new Date(event.created_at);
     var formattedDate = date.toLocaleString();
     var eventHtml = `
-        <div class="w-[300px] rounded-md border p-2">*
+        <div class="w-[300px] rounded-md border p-2">
             <a href="/events/view/${event.id}">
                 <div class="flex justify-center mb-3">
-                    <img src="storage/${event.cover}" alt="'${event.title}' Img Cover" onerror="$(this).attr('src', 'storage/images/thumbnail.png')">
+                    <img src="/storage/${event.cover}" alt="'${event.title}' Img Cover" onerror="$(this).attr('src', 'storage/images/thumbnail.png')">
                 </div>
                 <div>
                     <h2 class="truncate">Title: ${event.title}</h2>
