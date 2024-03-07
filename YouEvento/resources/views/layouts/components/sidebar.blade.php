@@ -20,5 +20,5 @@
 
     <div id="events" class="mt-4 overflow-auto h-[475px]"></div>
 
-    @include('layouts.main-modal')
+    @include('layouts.components.main-modal')
 </div>

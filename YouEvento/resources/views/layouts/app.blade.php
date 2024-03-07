@@ -11,8 +11,8 @@
 </head>
 
 <body>
-    @include('layouts.navbar')
-    @include('layouts.sidebar')
+    @include('layouts.components.navbar')
+    @include('layouts.components.sidebar')
     @yield('content')
 </body>
 

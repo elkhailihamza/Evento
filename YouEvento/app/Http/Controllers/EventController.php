@@ -14,6 +14,9 @@ class EventController extends Controller
         $events = Event::paginate(6);
         return view('events', compact('events'));
     }
+    public function viewEvent(Event $event) {
+        return view('eventView', ['event' => $event]);
+    }
     public function store(Request $request)
     {
         try {

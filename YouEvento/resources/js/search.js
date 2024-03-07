@@ -14,7 +14,7 @@ function search() {
             sortBy: sortBy,
         },
         success: function (data) {
-            if(sortBy == 1) {
+            if (sortBy == 1) {
                 appendEventsByTitle(data[0].events);
             } else {
                 appendEventsByCategory(data[0].events);
@@ -54,14 +54,16 @@ function createEventHtml(event) {
     var date = new Date(event.created_at);
     var formattedDate = date.toLocaleString();
     var eventHtml = `
-        <div class="w-[300px] rounded-md border p-2">
-            <div class="flex justify-center mb-3">
-                <img src="storage/${event.cover}" alt="'${event.title}' Img Cover" onerror="$(this).attr('src', 'storage/images/thumbnail.png')">
-            </div>
-            <div>
-                <h2 class="truncate">Title: ${event.title}</h2>
-                <p class="truncate">Created: ${formattedDate}</p>
-            </div>
+        <div class="w-[300px] rounded-md border p-2">*
+            <a href="/events/view/${event.id}">
+                <div class="flex justify-center mb-3">
+                    <img src="storage/${event.cover}" alt="'${event.title}' Img Cover" onerror="$(this).attr('src', 'storage/images/thumbnail.png')">
+                </div>
+                <div>
+                    <h2 class="truncate">Title: ${event.title}</h2>
+                    <p class="truncate">Created: ${formattedDate}</p>
+                </div>
+            </a>
         </div>
     `;
     return eventHtml;
