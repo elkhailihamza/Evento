@@ -47,8 +47,8 @@ class EventController extends Controller
     }
     public function getEvents()
     {
-        $events = Event::get();
-        return view('layouts.components.searched-card', ['events' => $events]);
+        $events = Event::where('user_id', auth()->user()->id)->paginate(5);
+        return view('layouts.components.searched-card-sidebar', ['events' => $events]);
     }
     public function search(Request $request)
     {
