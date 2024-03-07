@@ -5,3 +5,54 @@
 [modal-backdrop] {
     display: none;
 }
+
+/* Customized Pagination Styles */
+.pagination {
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+}
+
+.pagination li {
+    display: inline-block;
+    margin-right: 0.2rem;
+}
+
+.pagination li:last-child {
+    margin-right: 0;
+}
+
+.pagination span,
+.pagination a {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    margin: 0.125rem;
+    border: 1px solid #dee2e6;
+    color: #007bff;
+    border-radius: 0.25rem;
+    text-decoration: none;
+}
+
+.pagination .active span,
+.pagination .active a {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.pagination li[aria-label="next"],
+.pagination li[aria-label="previous"] {
+    border: none;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    color: #fff;
+}
+
+/* Responsive Styling */
+@media (max-width: 576px) {
+    .pagination li {
+        margin-right: 0.2rem;
+    }
+}

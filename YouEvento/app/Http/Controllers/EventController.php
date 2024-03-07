@@ -11,7 +11,7 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::get();
+        $events = Event::paginate(6);
         return view('events', compact('events'));
     }
     public function store(Request $request)
@@ -32,18 +32,54 @@ class EventController extends Controller
 
             $event = Event::create($data);
 
-            return redirect(back());
-        } catch(ValidationException $e) {
+            return redirect()->back();
+        } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Event Store Error!',
                 'error' => $e->errors(),
             ]);
         }
     }
-    public function getEvents() {
+    public function getEvents()
+    {
         $events = Event::get();
         return response()->json([
             compact('events')
         ]);
+    }
+    public function search(Request $request)
+    {
+        try {
+            $request->validate([
+                'search' => 'required|string',
+                'sortBy' => 'required|in:1,2',
+            ]);
+
+            $searchValue = $request->input('search');
+            $sortBy = $request->input('sortBy');
+
+            switch ($sortBy) {
+                case 1:
+                    $events = Event::with('category')->where('title', 'like', '%' . $searchValue . '%')->get();
+                    break;
+                case 2:
+                    $categories = Category::select('id', 'category_name')->where('category_name', 'like', '%' . $searchValue . '%')->get();
+                    foreach($categories as $category) :
+                        $events[$category->category_name] = Event::where('category_id', $category->id)->get();
+                    endforeach;
+                    break;
+                default:
+                    return response()->json([
+                        'error' => 'Not Found!'
+                    ]);
+            }
+            return response()->json([
+                compact('events'),
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'error' => $e->errors(),
+            ]);
+        }
     }
 }

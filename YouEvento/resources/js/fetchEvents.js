@@ -28,7 +28,7 @@ function generateEventHtml(event) {
     var eventHtml = `
         <div class="w-full rounded-md border p-2 mb-4">
             <div class="flex justify-center mb-3">
-            <img src="storage/${event.cover}" alt="'${event.title}' Img Cover" onerror="$(this).attr('src', 'storage/images/thumbnail.png')">
+                <img src="storage/${event.cover}" alt="'${event.title}' Img Cover" onerror="$(this).attr('src', 'storage/images/thumbnail.png')">
             </div>
             <div>
                 <h2 class="truncate">Title: ${event.title}</h2>
