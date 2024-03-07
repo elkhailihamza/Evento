@@ -1,3 +1,11 @@
+<div class="text-center flex justify-end position-absolute">
+    <button id="getEvents" data-drawer-backdrop="false" class="text-white font-medium text-sm mt-2 me-2 focus:outline-none" type="button" data-drawer-target="right-sidebar" data-drawer-show="right-sidebar" data-drawer-placement="right" aria-controls="right-sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H6M12 5l-7 7 7 7" />
+        </svg>
+    </button>
+</div>
+
 <div id="right-sidebar" class="fixed md:top-[70px] top-[74px] right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white shadow w-80" tabindex="-1" aria-labelledby="drawer-right-label">
     <h5 id="drawer-right-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"><svg class="w-4 h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />

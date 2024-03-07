@@ -20,7 +20,8 @@
                 <p class="text-gray-600">{{ $event->description }}</p>
             </div>
             <div class="md:mb-20 mt-6">
-                <button class="bg-blue-700 px-4 py-2 rounded text-white">Reserve</button>
+                <button class="bg-blue-700 px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="reservation-modal" data-modal-target="reservation-modal">Reserve</button>
+                @include('layouts.components.reserve-modal')
             </div>
         </div>
     </div>

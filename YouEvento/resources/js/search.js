@@ -14,11 +14,8 @@ function search() {
             sortBy: sortBy,
         },
         success: function (data) {
-            if (sortBy == 1) {
-                appendEventsByTitle(data[0].events);
-            } else {
-                appendEventsByCategory(data[0].events);
-            }
+            $('#searchSection').html(data);
+            // appendEvents(data[0].events);
         },
         error: function (error) {
             console.log(error);
@@ -26,28 +23,9 @@ function search() {
     });
 }
 
-function appendEventsByTitle(events) {
+function appendEvents(events) {
     var eventHTML = events.map(createEventHtml).join("");
-    $("#searchSection").empty();
     $("#searchSection").append(eventHTML);
-}
-
-function appendEventsByCategory(events) {
-    var eventHTMLCategory = events.map(createEventHtmlCategory).join("");
-    $("#searchSection").append(eventHTMLCategory);
-}
-
-function createEventHtmlCategory(event) {
-    var eventHTML = createEventHtml(event);
-    var eventHTMLCategory = `
-        <div class="">
-            <h1>${event.category_name}</h1>
-            <div>
-                ${eventHTML}
-            </div>
-        </div>
-    `;
-    return eventHTMLCategory;
 }
 
 function createEventHtml(event) {
@@ -55,15 +33,13 @@ function createEventHtml(event) {
     var formattedDate = date.toLocaleString();
     var eventHtml = `
         <div class="w-[300px] rounded-md border p-2">
-            <a href="/events/view/${event.id}">
-                <div class="flex justify-center mb-3">
-                    <img src="/storage/${event.cover}" alt="'${event.title}' Img Cover" onerror="$(this).attr('src', 'storage/images/thumbnail.png')">
-                </div>
-                <div>
-                    <h2 class="truncate">Title: ${event.title}</h2>
-                    <p class="truncate">Created: ${formattedDate}</p>
-                </div>
-            </a>
+            <div class="flex justify-center mb-3">
+                <img src="storage/${event.cover}" alt="'${event.title}' Img Cover" onerror="$(this).attr('src', 'storage/images/thumbnail.png')">
+            </div>
+            <div>
+                <h2 class="truncate">Title: ${event.title}</h2>
+                <p class="truncate">Created: ${formattedDate}</p>
+            </div>
         </div>
     `;
     return eventHtml;

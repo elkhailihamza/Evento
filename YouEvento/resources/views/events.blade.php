@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section>
+<section class="mt-20 mb-10">
     <div class="flex justify-center items-center">
         <h3 class="text-3xl">Events!</h3>
     </div>

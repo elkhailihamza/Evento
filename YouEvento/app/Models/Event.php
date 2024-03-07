@@ -15,7 +15,8 @@ class Event extends Model
         'location',
         'date',
         'seats',
-        'category_id'
+        'category_id',
+        'user_id',
     ];
 
     public function category() {

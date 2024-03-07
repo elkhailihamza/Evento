@@ -14,7 +14,8 @@ class EventController extends Controller
         $events = Event::paginate(6);
         return view('events', compact('events'));
     }
-    public function viewEvent(Event $event) {
+    public function viewEvent(Event $event)
+    {
         return view('eventView', ['event' => $event]);
     }
     public function store(Request $request)
@@ -30,6 +31,7 @@ class EventController extends Controller
             ]);
 
             $data['category_id'] = $request->input('category');
+            $data['user_id'] = auth()->user()->id;
             $imagePath = $request->file('cover')->store('uploads', 'public');
             $data['cover'] = $imagePath;
 
@@ -46,9 +48,7 @@ class EventController extends Controller
     public function getEvents()
     {
         $events = Event::get();
-        return response()->json([
-            compact('events'),
-        ]);
+        return view('layouts.components.searched-card', ['events' => $events]);
     }
     public function search(Request $request)
     {
@@ -67,7 +67,7 @@ class EventController extends Controller
                     break;
                 case 2:
                     $categories = Category::select('id', 'category_name')->where('category_name', 'like', '%' . $searchValue . '%')->get();
-                    foreach($categories as $category) :
+                    foreach ($categories as $category) :
                         $events[$category->category_name] = Event::where('category_id', $category->id)->get();
                     endforeach;
                     break;
@@ -76,9 +76,7 @@ class EventController extends Controller
                         'error' => 'Not Found!'
                     ]);
             }
-            return response()->json([
-                compact('events'),
-            ]);
+            return view('layouts.components.searched-card', ['events' => $events]);
         } catch (ValidationException $e) {
             return response()->json([
                 'error' => $e->errors(),
