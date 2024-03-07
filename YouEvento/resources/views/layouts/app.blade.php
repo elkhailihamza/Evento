@@ -15,6 +15,12 @@
     @include('layouts.sidebar')
     @yield('content')
 </body>
+
+<footer class="bg-[#000000] h-20">
+    <div class="flex justify-center items-center text-white h-full">
+        <span>©2024 YouEvento, Inc. All rights reserved.</span>
+    </div>
+</footer>
 @vite('resources/js/categories.js')
 @vite('resources/js/fetchEvents.js')
 @vite('resources/js/search.js')

@@ -40,7 +40,7 @@
     @endforeach
 </section>
 
-<section class="flex justify-center mt-5 mb-5">
+<section class="flex justify-center mt-10 mb-10">
     <div class="flex justify-end">
         {{ $events->links() }}
     </div>
