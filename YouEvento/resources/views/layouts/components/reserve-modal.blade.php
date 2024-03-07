@@ -22,37 +22,6 @@
                                 <input name="cover" required type="file" id="cover" class="block sr-only text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-[#242526] dark:border-gray-600 dark:placeholder-gray-400">
                             </label>
                         </div>
-                        <div class="mb-2 grid">
-                            <label for="title">Title</label>
-                            <input class="rounded-md" required type="text" name="title" id="title" placeholder="Title..">
-                        </div>
-                        <div class="mb-2 grid">
-                            <label for="description">Description</label>
-                            <textarea class="rounded-md ps-2" required style="height: 150px; resize: none;" name="description" id="description" placeholder="Description.." id=""></textarea>
-                        </div>
-                        <div class="flex gap-3">
-                            <div class="mb-2 grid">
-                                <label for="date">Date</label>
-                                <input class="rounded-md" required type="datetime-local" name="date" id="date">
-                            </div>
-                            <div class="mb-2 grid">
-                                <label for="location">Location</label>
-                                <input class="rounded-md" required type="text" name="location" id="location" placeholder="Location..">
-                            </div>
-                        </div>
-                        <div class="mb-2 grid">
-                            <label for="seats">Seats</label>
-                            <input class="rounded-md" required type="number" value="10" min="10" max="999" name="seats" id="seats" placeholder="Seats..">
-                        </div>
-                        <div class="mb-2 grid">
-                            <label for="seats">Category</label>
-                            <select id="selectCategory" class="rounded-md p-2.5" required name="category">
-                                <option value="null" hidden selected disabled>Select Category</option>
-                            </select>
-                        </div>
-                        <div class="flex justify-center">
-                            <button type="submit" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
-                        </div>
                     </div>
                 </form>
             </div>

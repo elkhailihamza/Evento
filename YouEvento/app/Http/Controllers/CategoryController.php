@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function getCategories() {
+    public function getCategories()
+    {
         $categories = Category::get();
-        return response()->json([
-            compact('categories'),
-        ]);
+        return view('layouts.components.category-option', ['categories' => $categories]);
     }
 }
