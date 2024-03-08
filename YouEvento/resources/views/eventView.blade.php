@@ -20,7 +20,11 @@
                 <p class="text-gray-600">{{ $event->description }}</p>
             </div>
             <div class="md:mb-20 mt-6">
+                @if ($event->status == 1)
                 <a id="getTickets" data-event-id="{{$event->id}}" class="bg-blue-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="reservation-modal" data-modal-target="reservation-modal">Reserve</a>
+                @else
+                <a id="getTickets" data-event-id="{{$event->id}}" class="bg-green-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="reservation-modal" data-modal-target="reservation-modal">Request</a>
+                @endif
                 @include('layouts.components.reserve-modal')
             </div>
         </div>
@@ -35,11 +39,12 @@
             <span class="ms-5">Created: {{$event->created_at->diffForHumans()}}</span>
             <span class="ms-5">Location: {{$event->location}}</span>
             <span class="ms-5">Date: {{$event->date}}</span>
-            <span class="ms-5">Seats: {{$event->seats}}</span>
-            @foreach ($event->tickets as $ticket)
-            <span class="ms-5">Tickets: {{$ticket->ticket_name.' - '.$ticket->ticket_price.'DH / Left: '.$ticket->tickets_left}}</span>
-            <br>
-            @endforeach
+            <span class="ms-5">
+                Tickets:
+                @foreach ($event->tickets as $ticket)
+                <span class="ms-2">{{$ticket->ticket_name.' - '.$ticket->ticket_price.'DH / Left: '.$ticket->tickets_left}}</span>
+                @endforeach
+            </span>
         </div>
     </div>
 </section>

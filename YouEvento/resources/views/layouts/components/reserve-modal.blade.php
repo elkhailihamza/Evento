@@ -9,7 +9,10 @@
             </div>
             <!-- Modal body -->
             <div class="p-4 w-full md:p-5 space-y-4 mt-3">
-                <form class="flex flex-col items-center" method="post" action="{{route('reservation.store')}}" enctype="multipart/form-data">
+                <div id="ticketSection">
+
+                </div>
+                <form class="flex flex-col items-center" method="post" action="{{route('reservation.store', ['event' => $event])}}" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
                     <div class="w-3/4">
@@ -23,7 +26,11 @@
                             </select>
                         </div>
                         <div class="flex justify-center">
-                            <button class="p-2.5 bg-blue-700 text-white rounded">Reserve</button>
+                            @if ($event->status == 1)
+                            <button id="reserve" type="submit" class="p-2.5 hidden bg-blue-700 text-white rounded">Reserve</button>
+                            @else
+                            <button id="reserve" type="submit" class="p-2.5 hidden bg-green-700 text-white rounded">Request</button>
+                            @endif
                         </div>
                     </div>
                 </form>

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\Reservation;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class EventController extends Controller
@@ -16,7 +18,7 @@ class EventController extends Controller
         return view('events', compact('events'));
     }
     public function viewEvent(Event $event)
-    {   
+    { 
         return view('eventView', ['event' => $event]);
     }
     public function store(Request $request)

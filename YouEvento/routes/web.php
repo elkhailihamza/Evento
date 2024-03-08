@@ -39,11 +39,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/events/search', 'search');
     });
     Route::controller(ReservationController::class)->group(function() {
-        Route::post('/reservations/store', 'store')->name('reservation.store');
+        Route::post('/reservations/{event}/store', 'store')->name('reservation.store');
     });
 
     Route::controller(TicketController::class)->group(function() {
         Route::get('/tickets/get', 'getTickets');
+        Route::get('/tickets/info/get', 'getTicketInfo');
     });
 
     Route::middleware('organisateur')->group(function () {

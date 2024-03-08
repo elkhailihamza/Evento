@@ -1,21 +1,48 @@
-// $(document).ready(function() {
-//     $('#getTickets').on('click', fetchTickets);
-// });
+$(document).ready(function () {
+    $("#getTickets").on("click", fetchTickets);
+    $("#selectTickets").on("change", fetchSelect);
+});
 
-// function fetchTickets() {
-//     var event_id = $('#getTickets').attr('data-event-id');
-//     $.ajax({
-//         url: '/tickets/get',
-//         type: 'GET',
-//         data: {
-//             event_id,
-//         },
-//         success: function(data) {
-//             console.log(data);
-//             $('#selectTickets').html(data);
-//         },
-//         error: function(error) {
-//             console.log(error);
-//         },
-//     });
-// }
+var fetched = new Map();
+
+function fetchTickets() {
+    if (fetched.has("true")) {
+        return;
+    }
+
+    var event_id = $("#getTickets").attr("data-event-id");
+    $.ajax({
+        url: "/tickets/get",
+        type: "GET",
+        data: {
+            event_id,
+        },
+        success: function (data) {
+            fetched.set("true");
+            $("#selectTickets").html(data);
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}
+
+function fetchSelect() {
+    console.log("changed");
+    var ticket = $("#selectTickets").val();
+    $.ajax({
+        url: "/tickets/info/get",
+        type: "GET",
+        data: {
+            ticket,
+        },
+        success: function (data) {
+            console.log(data);
+            $("#ticketSection").html(data);
+            $("#reserve").removeClass("hidden");
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}

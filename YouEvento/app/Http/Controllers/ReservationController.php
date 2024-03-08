@@ -20,7 +20,7 @@ class ReservationController extends Controller
         $user_id = auth()->user()->id;
         $ticketId = $request->input('ticket');
         $ticket = Ticket::find($ticketId);
-        $status = $event->status;
+        $status = $event->automated;
 
         if ($ticket->tickets_left > 0) {
             $reservation['ticket_id'] = $ticketId;

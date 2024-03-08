@@ -9,7 +9,12 @@ class TicketController extends Controller
 {
     public function getTickets(Request $request)
     {
-        $tickets = Ticket::where('event_id', $request->input('event_id'));
+        $tickets = Ticket::where('event_id', $request->input('event_id'))->get();
         return view('layouts.components.ticket-option', ['tickets' => $tickets]);
+    }
+    public function getTicketInfo(Request $request)
+    {
+        $ticket = Ticket::where('id', $request->input('ticket'))->first();
+        return view('layouts.components.ticket-select-info', ['ticket' => $ticket]);
     }
 }
