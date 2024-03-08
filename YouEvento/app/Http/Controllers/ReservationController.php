@@ -10,6 +10,10 @@ use Illuminate\Validation\ValidationException;
 
 class ReservationController extends Controller
 {
+    public function index() {
+        $reservations = Reservation::where('user_id', auth()->user()->id)->get();
+        return view('reservations', compact('reservations'));
+    }
     public function store(Request $request, Event $event)
     {
         $reservation = $request->validate([

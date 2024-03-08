@@ -7,7 +7,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     @vite('resources/css/app.css')
-    <title>Document</title>
+    <title>YouEvento</title>
 </head>
 
 <body>

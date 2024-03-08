@@ -14,11 +14,11 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::paginate(6);
+        $events = Event::join('tickets', 'events.id', '=', 'tickets.event_id')->select('events.*')->where('tickets.ticket_qnt', '>', 0)->groupBy('events.id')->paginate(6);
         return view('events', compact('events'));
     }
     public function viewEvent(Event $event)
-    { 
+    {
         return view('eventView', ['event' => $event]);
     }
     public function store(Request $request)
@@ -38,7 +38,7 @@ class EventController extends Controller
             $data['category_id'] = $request->input('category');
             $data['user_id'] = auth()->user()->id;
             $data['cover'] = $imagePath;
-            $data['automated'] = $request->input('validation');            
+            $data['automated'] = $request->input('validation');
 
             Event::create($data);
 
