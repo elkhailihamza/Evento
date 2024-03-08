@@ -44,6 +44,8 @@ class AuthController extends Controller
                 'password' => 'required|string|min:8|confirmed',
             ]);
 
+            $data['role_id'] = 1;
+
             User::create($data);
 
             return redirect(route('index'))->with(

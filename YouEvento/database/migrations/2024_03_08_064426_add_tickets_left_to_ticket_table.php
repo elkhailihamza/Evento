@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('role_id')->constrained()->onUpdate('cascade');
+        Schema::table('tickets', function (Blueprint $table) {
+            return $table->integer('tickets_left');
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('tickets', function (Blueprint $table) {
             //
         });
     }

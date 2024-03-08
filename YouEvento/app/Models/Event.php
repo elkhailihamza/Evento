@@ -14,6 +14,15 @@ class Event extends Model
         'cover',
         'location',
         'date',
-        'seats',
+        'automated',
+        'category_id',
+        'user_id',
     ];
+
+    public function category() {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+    public function tickets() {
+        return $this->hasMany(Ticket::class, 'event_id');
+    }
 }
