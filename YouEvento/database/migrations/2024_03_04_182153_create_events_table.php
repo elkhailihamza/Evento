@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('cover');
             $table->text('location');
             $table->date('date');
+            $table->boolean('automated');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade');
             $table->timestamps();
         });

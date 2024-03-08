@@ -14,7 +14,7 @@ class Event extends Model
         'cover',
         'location',
         'date',
-        'seats',
+        'automated',
         'category_id',
         'user_id',
     ];

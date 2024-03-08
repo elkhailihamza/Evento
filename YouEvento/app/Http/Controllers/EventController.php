@@ -28,13 +28,15 @@ class EventController extends Controller
                 'cover' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'location' => 'required|string|max:255',
                 'date' => 'required|date_format:Y-m-d\TH:i',
-                'seats' => 'required|integer|min:1',
+                'validation' => 'required|boolean'
             ]);
+
+            $imagePath = $request->file('cover')->store('uploads', 'public');
 
             $data['category_id'] = $request->input('category');
             $data['user_id'] = auth()->user()->id;
-            $imagePath = $request->file('cover')->store('uploads', 'public');
             $data['cover'] = $imagePath;
+            $data['automated'] = $request->input('validation');            
 
             Event::create($data);
 

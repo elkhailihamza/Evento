@@ -4,7 +4,7 @@
 
 <section class="flex justify-center">
     <div class="w-4/5">
-        <a href="{{route('events')}}" class="text-[16px] opacity-50 hover:underline flex items-center"><svg class="mt-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <a href="{{route('events')}}" class="text-[16px] w-20 opacity-50 hover:underline flex items-center"><svg class="mt-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M19 12H6M12 5l-7 7 7 7" />
             </svg><span>Go back</span></a>
     </div>
@@ -37,7 +37,7 @@
             <span class="ms-5">Date: {{$event->date}}</span>
             <span class="ms-5">Seats: {{$event->seats}}</span>
             @foreach ($event->tickets as $ticket)
-            <span class="ms-5">Tickets: {{$ticket->ticket_name.' - '.$ticket->ticket_price.'DH / Left: '.$ticket->ticket_qnt}}</span>
+            <span class="ms-5">Tickets: {{$ticket->ticket_name.' - '.$ticket->ticket_price.'DH / Left: '.$ticket->tickets_left}}</span>
             <br>
             @endforeach
         </div>

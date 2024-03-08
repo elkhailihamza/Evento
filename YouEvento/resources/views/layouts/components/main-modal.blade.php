@@ -54,14 +54,21 @@
                             </div>
                         </div>
                         <div class="mb-2 grid">
-                            <label for="seats">Seats</label>
-                            <input class="rounded-md" required type="number" value="10" min="10" max="999" name="seats" id="seats" placeholder="Seats..">
-                        </div>
-                        <div class="mb-2 grid">
                             <label for="seats">Category</label>
                             <select id="selectCategory" class="rounded-md p-2.5" required name="category">
                                 <option value="null" hidden selected disabled>Select Category</option>
                             </select>
+                        </div>
+                        <div class="mb-2 grid">
+                            <label>Validation?</label>
+                            <div>
+                                <input type="radio" id="auto" name="validation" value="1" checked>
+                                <label for="auto">Auto</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="manual" name="validation" value="0">
+                                <label for="manual">Manual</label>
+                            </div>
                         </div>
                         <div class="flex justify-center">
                             <button type="submit" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
