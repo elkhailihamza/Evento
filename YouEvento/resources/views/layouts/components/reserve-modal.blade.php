@@ -15,7 +15,7 @@
                     <div class="w-3/4">
                         <label for="seats">Tickets</label>
                         <div class="mb-2 border border-[#000000] rounded-md">
-                            <select id="selectTickets" class="w-full rounded-md p-2.5" required name="ticketType">
+                            <select id="selectTickets" name="ticket" class="w-full rounded-md p-2.5" required>
                                 <option value="null" hidden selected disabled>Select Ticket</option>
                                 @foreach ($event->tickets as $ticket)
                                 <option value="{{$ticket->id}}">{{$ticket->ticket_name}}</option>
