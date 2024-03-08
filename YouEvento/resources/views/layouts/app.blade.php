@@ -14,13 +14,14 @@
     @include('layouts.components.navbar')
     @can('viewOriganizerComponent', \App\Models\User::class)
         @include('layouts.components.sidebar')
-        @vite('resources/js/categories.js')
-        @vite('resources/js/fetchTickets.js')
-        @vite('resources/js/fetchEvents.js')
+        @vite('resources/js/organisateur/FetchCategoriesForSidebar.js')
+        @vite('resources/js/organisateur/FetchTickets.js')
+        @vite('resources/js/organisateur/FetchEvents.js')
     @endcan
     @yield('content')
 </body>
-@vite('resources/js/search.js')
+@vite('resources/js/Search.js')
+@vite('resources/js/FetchCategoriesForEditModal.js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 

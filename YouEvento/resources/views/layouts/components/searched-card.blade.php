@@ -1,7 +1,7 @@
 @foreach ($events as $event)
 <div class="w-[300px] rounded-md border p-2">
     <a href="{{route('viewEvent', $event)}}">
-        <div class="flex justify-center mb-3">
+        <div class="flex bg-gray-100 justify-center mb-3">
             <img src="{{ asset('storage/'.$event->cover) }}">
         </div>
         <div>

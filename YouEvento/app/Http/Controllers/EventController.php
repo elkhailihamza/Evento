@@ -21,7 +21,7 @@ class EventController extends Controller
     {
         return view('eventView', ['event' => $event]);
     }
-    public function store(Request $request)
+    public function RequestValidate($request, $event = null)
     {
         try {
             $data = $request->validate([
@@ -33,16 +33,17 @@ class EventController extends Controller
                 'validation' => 'required|boolean'
             ]);
 
+            if ($event->cover && file_exists(storage_path('app/public/' . $event->cover))) {
+                unlink(storage_path('app/public/' . $event->cover));
+            }
+
             $imagePath = $request->file('cover')->store('uploads', 'public');
 
             $data['category_id'] = $request->input('category');
-            $data['user_id'] = auth()->user()->id;
             $data['cover'] = $imagePath;
             $data['automated'] = $request->input('validation');
 
-            Event::create($data);
-
-            return redirect()->back();
+            return $data;
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Event Store Error!',
@@ -50,10 +51,28 @@ class EventController extends Controller
             ]);
         }
     }
+    public function store(Request $request)
+    {
+        $data = $this->RequestValidate($request);
+        $data['user_id'] = auth()->user()->id;
+        $event = Event::create($data);
+        return redirect(route('viewEvent', ['event' => $event]));
+    }
+    public function update(Request $request, Event $event)
+    {
+        $data = $this->RequestValidate($request);
+        $event->update($data);
+        return redirect(route('viewEvent', ['event' => $event]));
+    }
     public function getEvents()
     {
         $events = Event::where('user_id', auth()->user()->id)->paginate(5);
         return view('layouts.components.searched-card-sidebar', ['events' => $events]);
+    }
+    public function getEvent(Request $request)
+    {
+        $event = Event::find($request->input('event_id'));
+        return view('layouts.components.edit-modal', ['event' => $event]);
     }
     public function search(Request $request)
     {

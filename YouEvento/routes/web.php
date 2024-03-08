@@ -38,22 +38,23 @@ Route::middleware('auth')->group(function () {
         Route::get('/events/view/{event}', 'viewEvent')->name('viewEvent');
         Route::get('/events/search', 'search');
     });
-    Route::controller(ReservationController::class)->group(function() {
+    Route::controller(ReservationController::class)->group(function () {
         Route::get('/reservations', 'index')->name('reservations');
         Route::post('/reservations/{event}/store', 'store')->name('reservation.store');
     });
 
-    Route::controller(TicketController::class)->group(function() {
+    Route::controller(TicketController::class)->group(function () {
         Route::get('/tickets/get', 'getTickets');
         Route::get('/tickets/info/get', 'getTicketInfo');
         Route::post('/tickets/{event}/store', 'store')->name('tickets.store');
     });
+    Route::get('/categories/get', [CategoryController::class, 'getCategories']);
 
     Route::middleware('organisateur')->group(function () {
         Route::controller(EventController::class)->group(function () {
             Route::get('/events/get', 'getEvents');
+            Route::get('/events/get', 'getEvents')->name('events.update');
             Route::post('/events/store', 'store')->name('events.store');
         });
-        Route::get('/categories/get', [CategoryController::class, 'getCategories']);
     });
 });

@@ -26,9 +26,10 @@
                 <a id="getTickets" data-event-id="{{$event->id}}" class="bg-green-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="reservation-modal" data-modal-target="reservation-modal">Request</a>
                 @endif
                 <a class="bg-yellow-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="add-tickets-modal" data-modal-target="add-tickets-modal">Add Tickets</a>
-                <a class="bg-blue-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="reservation-modal" data-modal-target="reservation-modal">Edit</a>
+                <a id="modalEdit" data-event-id="${{$event->id}}" class="bg-black cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="edit-modal" data-modal-target="edit-modal">Edit</a>
                 @include('layouts.components.reserve-modal')
                 @include('layouts.components.add-tickets-modal')
+                @include('layouts.components.edit-modal')
             </div>
         </div>
     </div>
