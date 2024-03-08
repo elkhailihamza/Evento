@@ -20,14 +20,14 @@
                 <p class="text-gray-600">{{ $event->description }}</p>
             </div>
             <div class="md:mb-20 mt-6">
-                <button class="bg-blue-700 px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="reservation-modal" data-modal-target="reservation-modal">Reserve</button>
+                <a id="getTickets" data-event-id="{{$event->id}}" class="bg-blue-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="reservation-modal" data-modal-target="reservation-modal">Reserve</a>
                 @include('layouts.components.reserve-modal')
             </div>
         </div>
     </div>
 </section>
 
-<section class="flex justify-center mb-20">
+<section class="flex justify-center mb-5">
     <div class="w-3/4">
         <h1 class="text-[26px]">Info</h1>
         <hr class="mb-5">
@@ -36,6 +36,10 @@
             <span class="ms-5">Location: {{$event->location}}</span>
             <span class="ms-5">Date: {{$event->date}}</span>
             <span class="ms-5">Seats: {{$event->seats}}</span>
+            @foreach ($event->tickets as $ticket)
+            <span class="ms-5">Tickets: {{$ticket->ticket_name.' - '.$ticket->ticket_price.'DH / Left: '.$ticket->ticket_qnt}}</span>
+            <br>
+            @endforeach
         </div>
     </div>
 </section>

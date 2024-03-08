@@ -9,18 +9,21 @@
             </div>
             <!-- Modal body -->
             <div class="p-4 w-full md:p-5 space-y-4 mt-3">
-                <form class="flex flex-col items-center" method="post" action="{{route('events.store')}}" enctype="multipart/form-data">
+                <form class="flex flex-col items-center" method="post" action="{{route('reservation.store')}}" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
-                    <div style="max-width: 500px;">
+                    <div class="w-3/4">
+                        <label for="seats">Tickets</label>
                         <div class="mb-2 border border-[#000000] rounded-md">
-                            <label for="cover" class="block text-sm flex cursor-pointer w-full justify-between font-medium items-center gap-2 dark:text-white" for="file_input"><span class="p-3.5 text-[#6B7280] ">Upload
-                                    Event Cover</span><svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#686868" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z" />
-                                    <path d="M14 3v5h5M12 18v-6M9 15h6" />
-                                </svg>
-                                <input name="cover" required type="file" id="cover" class="block sr-only text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-[#242526] dark:border-gray-600 dark:placeholder-gray-400">
-                            </label>
+                            <select id="selectTickets" class="w-full rounded-md p-2.5" required name="ticketType">
+                                <option value="null" hidden selected disabled>Select Ticket</option>
+                                @foreach ($event->tickets as $ticket)
+                                <option value="{{$ticket->id}}">{{$ticket->ticket_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="flex justify-center">
+                            <button class="p-2.5 bg-blue-700 text-white rounded">Reserve</button>
                         </div>
                     </div>
                 </form>

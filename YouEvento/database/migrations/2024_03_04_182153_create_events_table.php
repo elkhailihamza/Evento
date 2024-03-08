@@ -18,7 +18,6 @@ return new class extends Migration
             $table->text('cover');
             $table->text('location');
             $table->date('date');
-            $table->integer('seats');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade');
             $table->timestamps();
         });

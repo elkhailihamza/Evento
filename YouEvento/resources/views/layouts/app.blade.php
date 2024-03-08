@@ -15,6 +15,7 @@
     @can('viewOriganizerComponent', \App\Models\User::class)
         @include('layouts.components.sidebar')
         @vite('resources/js/categories.js')
+        @vite('resources/js/fetchTickets.js')
         @vite('resources/js/fetchEvents.js')
     @endcan
     @yield('content')

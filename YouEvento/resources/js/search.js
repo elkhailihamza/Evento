@@ -14,7 +14,6 @@ function search() {
             sortBy: sortBy,
         },
         success: function (data) {
-            console.log(data);
             $('#searchSection').html(data);
         },
         error: function (error) {
