@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(TicketController::class)->group(function() {
         Route::get('/tickets/get', 'getTickets');
         Route::get('/tickets/info/get', 'getTicketInfo');
+        Route::post('/tickets/{event}/store', 'store')->name('tickets.store');
     });
 
     Route::middleware('organisateur')->group(function () {
