@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
         Route::controller(EventController::class)->group(function () {
             Route::get('/events/get', 'getEvents');
             Route::get('/events/get', 'getEvents')->name('events.update');
-            Route::get('/events/{event}/statistics', 'viewStatistics')->name('events.statistics');
+            Route::get('/events/{event}/statistics', 'viewStatistics')->middleware('checkUserIdForEvent')->name('events.statistics');
             Route::post('/events/store', 'store')->name('events.store');
         });
     });
