@@ -3,10 +3,27 @@
 @section('content')
 
 <section class="flex justify-center">
-    <div class="w-4/5">
+    <div class="flex w-4/5 justify-between items-center">
         <a href="{{route('events')}}" class="text-[16px] w-20 opacity-50 hover:underline flex items-center"><svg class="mt-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M19 12H6M12 5l-7 7 7 7" />
             </svg><span>Go back</span></a>
+        <span>
+            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                </svg>
+            </button>
+        </span>
+
+        @if ($event->user_id == auth()->user()->id)
+        <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                <li>
+                    <a href="{{route('events.statistics', $event)}}" class="block px-4 py-2 hover:bg-gray-100 text-black">View Statistics</a>
+                </li>
+            </ul>
+        </div>
+        @endif
+
     </div>
 </section>
 <section class="flex justify-center mt-10 mb-10">
@@ -26,7 +43,7 @@
                 <a id="getTickets" data-event-id="{{$event->id}}" class="bg-green-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="reservation-modal" data-modal-target="reservation-modal">Request</a>
                 @endif
                 <a class="bg-yellow-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="add-tickets-modal" data-modal-target="add-tickets-modal">Add Tickets</a>
-                <a id="modalEdit" data-event-id="${{$event->id}}" class="bg-black cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="edit-modal" data-modal-target="edit-modal">Edit</a>
+                <a id="modalEdit" data-event-id="{{$event->id}}" class="bg-black cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="edit-modal" data-modal-target="edit-modal">Edit</a>
                 @include('layouts.components.reserve-modal')
                 @include('layouts.components.add-tickets-modal')
                 @include('layouts.components.edit-modal')

@@ -21,6 +21,9 @@ class EventController extends Controller
     {
         return view('eventView', ['event' => $event]);
     }
+    public function viewStatistics(Event $event) {
+        return view('statistics', compact('event'));
+    }
     public function RequestValidate($request, $event = null)
     {
         try {
