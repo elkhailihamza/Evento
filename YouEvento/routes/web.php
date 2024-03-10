@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
@@ -56,6 +57,16 @@ Route::middleware('auth')->group(function () {
             Route::get('/events/get', 'getEvents')->name('events.update');
             Route::get('/events/{event}/statistics', 'viewStatistics')->middleware('checkUserIdForEvent')->name('events.statistics');
             Route::post('/events/store', 'store')->name('events.store');
+        });
+    });
+    Route::middleware('admin')->group(function() {
+        Route::controller(AdminController::class)->group(function() {
+            Route::get('/dashboard/home', 'index')->name('admin.index');
+            Route::get('/dashboard/events', 'events')->name('admin.events');
+            Route::post('/dashboard/events/{event}/approve', 'approve')->name('admin.approve');
+            Route::post('/dashboard/events/{event}/decline', 'decline')->name('admin.decline');
+            Route::get('/dashboard/permissions', 'permissions')->name('admin.permissions');
+            Route::get('/dashboard/categories', 'categories')->name('admin.categories');
         });
     });
 });

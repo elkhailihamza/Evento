@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class Organisateur
+class Admin
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,7 @@ class Organisateur
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->role_id != 2) {
+        if (auth()->user()->role_id != 3) {
             return redirect()->back()->with('error', 'Unauthorized');
         }
         return $next($request);
