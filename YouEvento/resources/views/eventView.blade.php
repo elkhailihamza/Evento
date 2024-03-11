@@ -9,29 +9,27 @@
             </svg><span>Go back</span></a>
         <div class="flex gap-2">
             @if ($event->status == 2)
-                <span></span>
+            <span></span>
             @endif
-            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" viewBox="0 0 16 16">
+            @if ($event->user_id == auth()->user()->id)
+            <button data-dropdown-toggle="event-menu" data-dropdown-target="event-menu" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                 </svg>
             </button>
+            <div id="event-menu" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                    <li>
+                        <a href="{{route('events.statistics', $event)}}" class="block px-4 py-2 hover:bg-gray-100 text-black">View Statistics</a>
+                    </li>
+                    @if (!$event->automated)
+                    <li>
+                        <a href="{{route('user.validation', $event)}}" class="block px-4 py-2 hover:bg-gray-100 text-black">User Validation</a>
+                    </li>
+                    @endif
+                </ul>
+            </div>
+            @endif
         </div>
-
-        @if ($event->user_id == auth()->user()->id)
-        <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                <li>
-                    <a href="{{route('events.statistics', $event)}}" class="block px-4 py-2 hover:bg-gray-100 text-black">View Statistics</a>
-                </li>
-                @if (!$event->automated)
-                <li>
-                    <a href="{{route('user.validation', $event)}}" class="block px-4 py-2 hover:bg-gray-100 text-black">User Validation</a>
-                </li>
-                @endif
-            </ul>
-        </div>
-        @endif
-
     </div>
 </section>
 <section class="flex justify-center mt-10 mb-10">
@@ -51,11 +49,11 @@
                 @else
                 <a id="getTickets" data-event-id="{{$event->id}}" class="bg-green-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="reservation-modal" data-modal-target="reservation-modal">Request</a>
                 @endif
+                @include('layouts.components.reserve-modal')
                 @endif
                 @if ($event->user_id == auth()->user()->id)
                 <a class="bg-yellow-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="add-tickets-modal" data-modal-target="add-tickets-modal">Add Tickets</a>
                 <a id="modalEdit" data-event-id="{{$event->id}}" class="bg-black cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="edit-modal" data-modal-target="edit-modal">Edit</a>
-                @include('layouts.components.reserve-modal')
                 @include('layouts.components.add-tickets-modal')
                 @include('layouts.components.edit-modal')
                 @endif

@@ -113,16 +113,13 @@ class EventController extends Controller
                     break;
                 case 2:
                     $categories = Category::select('id', 'category_name')->where('category_name', 'like', '%' . $searchValue . '%')->get();
-                    foreach ($categories as $category) :
-                        $events[$category->category_name] = Event::where('category_id', $category->id)->get();
-                    endforeach;
                     break;
                 default:
                     return response()->json([
                         'error' => 'Not Found!'
                     ]);
             }
-            return view('layouts.components.searched-card', ['events' => $events]);
+            return view('layouts.components.searched-card', ['events' => $events ?? null, 'categories' => $categories ?? null]);
         } catch (ValidationException $e) {
             return response()->json([
                 'error' => $e->errors(),
