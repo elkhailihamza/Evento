@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,8 @@ class AdminController extends Controller
     }
     public function categories()
     {
-        return view('admin.categories');
+        $categories = Category::paginate(6);
+        return view('admin.categories', compact('categories'));
     }
     public function permissions()
     {

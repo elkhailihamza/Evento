@@ -31,7 +31,7 @@
                         <span><span class="font-medium">Location:</span> {{$event->location}}</span>
                         <span><span class="font-medium">Date:</span> {{$event->date}}</span>
                         <span><span class="font-medium">Tickets:</span> {{$event->tickets->count()}}
-                            <span>
+                            <span> 
                                 @foreach ($event->tickets as $ticket)
                                 <span>| {{$ticket->ticket_name}}</span>
                                 <span>/ {{$ticket->ticket_qnt}}</span>

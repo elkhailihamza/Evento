@@ -68,5 +68,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/dashboard/permissions', 'permissions')->name('admin.permissions');
             Route::get('/dashboard/categories', 'categories')->name('admin.categories');
         });
+        Route::controller(CategoryController::class)->group(function() {
+            Route::post('/dashboard/categories/create', 'store')->name('admin.categories.create');
+            Route::post('/dashboard/categories/{category}/update', 'update')->name('admin.categories.update');
+            Route::post('/dashboard/categories/{category}/destroy', 'destroy')->name('admin.categories.destroy');
+        });
     });
 });
