@@ -45,7 +45,7 @@ class EventController extends Controller
                 'validation' => 'required|boolean',
             ]);
 
-            if ($event->cover && file_exists(storage_path('app/public/' . $event->cover))) {
+            if ($event && file_exists(storage_path('app/public/' . $event->cover))) {
                 unlink(storage_path('app/public/' . $event->cover));
             }
 
@@ -69,7 +69,7 @@ class EventController extends Controller
         $found = $this->find($event);
         if (!$found) {
             $data = $this->RequestValidate($request);
-            $event = Event::create($data['info']);
+            $event = Event::create($data);
             return redirect(route('viewEvent', ['event' => $event]));
         } else {
             return redirect()->back()->with('error', 'Already made a reservation!');

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserValidationController;
@@ -31,10 +32,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/logout', 'logout')->name('logout')->middleware('auth');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::controller(HomeController::class)->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
+Route::middleware(['auth', 'banned'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::controller(EventController::class)->group(function () {
         Route::get('/events', 'index')->name('events');
         Route::get('/events/view/{event}', 'viewEvent')->name('viewEvent');
@@ -44,14 +43,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/reservations', 'index')->name('reservations');
         Route::post('/reservations/{event}/store', 'store')->name('reservation.store');
     });
-
     Route::controller(TicketController::class)->group(function () {
         Route::get('/tickets/get', 'getTickets');
         Route::get('/tickets/info/get', 'getTicketInfo');
         Route::post('/tickets/{event}/store', 'store')->name('tickets.store');
     });
+    Route::get('/ticket/download', [PDFController::class, 'generatePDF'])->name('tickets.download');
     Route::get('/categories/get', [CategoryController::class, 'getCategories']);
-
     Route::middleware('organisateur')->group(function () {
         Route::controller(EventController::class)->group(function () {
             Route::get('/events/get', 'getEvents');
@@ -59,14 +57,14 @@ Route::middleware('auth')->group(function () {
             Route::post('/events/store', 'store')->name('events.store');
             Route::post('/events/update', 'update')->name('events.update');
         });
-        Route::controller(UserValidationController::class)->group(function() {
+        Route::controller(UserValidationController::class)->group(function () {
             Route::get('/events/{event}/validation', 'index')->name('user.validation');
             Route::post('/events/{event}/validation/{user}/accept', 'accept')->name('user.validation.accept');
             Route::post('/events/{event}/validation/{user}/decline', 'decline')->name('user.validation.decline');
         });
     });
-    Route::middleware('admin')->group(function() {
-        Route::controller(AdminController::class)->group(function() {
+    Route::middleware('admin')->group(function () {
+        Route::controller(AdminController::class)->group(function () {
             Route::get('/dashboard/home', 'index')->name('admin.index');
             Route::get('/dashboard/events', 'events')->name('admin.events');
             Route::post('/dashboard/events/{event}/approve', 'approve')->name('admin.approve');
@@ -76,7 +74,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/dashboard/categories', 'categories')->name('admin.categories');
             Route::get('/dashboard/statistics', 'statistics')->name('admin.statistics');
         });
-        Route::controller(CategoryController::class)->group(function() {
+        Route::controller(CategoryController::class)->group(function () {
             Route::post('/dashboard/categories/create', 'store')->name('admin.categories.create');
             Route::post('/dashboard/categories/{category}/update', 'update')->name('admin.categories.update');
             Route::post('/dashboard/categories/{category}/destroy', 'destroy')->name('admin.categories.destroy');

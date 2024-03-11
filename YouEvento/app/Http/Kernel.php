@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'organisateur' => \App\Http\Middleware\Organisateur::class,
         'admin' => \App\Http\Middleware\Admin::class,
         'checkUserIdForEvent' => \App\Http\Middleware\CheckUserId::class,
+        'banned' => \App\Http\Middleware\Banned::class,
     ];
 }

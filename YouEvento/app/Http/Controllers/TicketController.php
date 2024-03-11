@@ -20,7 +20,7 @@ class TicketController extends Controller
     }
     public function store(Request $request, Event $event) {
 
-        $found = Ticket::where('ticket_name', $request->input('ticket_name'))->first();
+        $found = Ticket::where('ticket_name', $request->input('ticket_name'))->where('event_id', $event->id)->first();
 
         if ($found) {
             return redirect()->back();
