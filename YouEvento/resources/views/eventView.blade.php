@@ -37,10 +37,16 @@
                 <p class="text-gray-600">{{ $event->description }}</p>
             </div>
             <div class="md:mb-20 mt-6">
-                @if ($event->status == 1)
-                <a id="getTickets" data-event-id="{{$event->id}}" class="bg-blue-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="reservation-modal" data-modal-target="reservation-modal">Reserve</a>
+                @if (!$found)
+                    @if ($event->status == 1)
+                        <a id="getTickets" data-event-id="{{$event->id}}" class="bg-blue-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="reservation-modal" data-modal-target="reservation-modal">Reserve</a>
+                    @else
+                        <a id="getTickets" data-event-id="{{$event->id}}" class="bg-green-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="reservation-modal" data-modal-target="reservation-modal">Request</a>
+                    @endif
                 @else
-                <a id="getTickets" data-event-id="{{$event->id}}" class="bg-green-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="reservation-modal" data-modal-target="reservation-modal">Request</a>
+                        <div class="block mb-5">
+                            <h2>*Already Made a Reservation</h2>
+                        </div>
                 @endif
                 <a class="bg-yellow-700 cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="add-tickets-modal" data-modal-target="add-tickets-modal">Add Tickets</a>
                 <a id="modalEdit" data-event-id="{{$event->id}}" class="bg-black cursor-pointer px-4 py-2 rounded text-white" data-backdrop="false" data-modal-toggle="edit-modal" data-modal-target="edit-modal">Edit</a>

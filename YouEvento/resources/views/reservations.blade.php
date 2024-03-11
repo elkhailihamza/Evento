@@ -24,6 +24,13 @@
                 @endif
             </h2>
             <p class="truncate">Reserved on: {{$reservation->created_at->diffForHumans()}}</p>
+            <div class="flex justify-center mt-5">
+                @if ($reservation->status == 1)
+                <a class="bg-black py-1 px-2 text-white ">Awaiting..</a>
+                @else
+                <a class="bg-green-700 py-1 px-2 text-white">Download!</a>
+                @endif
+            </div>
         </div>
     </div>
     @endforeach

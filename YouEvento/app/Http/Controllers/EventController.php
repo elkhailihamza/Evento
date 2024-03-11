@@ -19,9 +19,14 @@ class EventController extends Controller
     }
     public function viewEvent(Event $event)
     {
-        return view('eventView', ['event' => $event]);
+        $found = Reservation::join('tickets', 'tickets.id', '=', 'reservations.ticket_id')
+            ->where('reservations.user_id', auth()->user()->id)
+            ->where('tickets.event_id', $event->id)
+            ->first();
+        return view('eventView', ['event' => $event, 'found' => $found]);
     }
-    public function viewStatistics(Event $event) {
+    public function viewStatistics(Event $event)
+    {
         return view('statistics', compact('event'));
     }
     public function RequestValidate($request, $event = null)
