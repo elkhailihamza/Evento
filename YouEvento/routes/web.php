@@ -7,6 +7,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\UserValidationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,9 +55,14 @@ Route::middleware('auth')->group(function () {
     Route::middleware('organisateur')->group(function () {
         Route::controller(EventController::class)->group(function () {
             Route::get('/events/get', 'getEvents');
-            Route::get('/events/get', 'getEvents')->name('events.update');
             Route::get('/events/{event}/statistics', 'viewStatistics')->middleware('checkUserIdForEvent')->name('events.statistics');
             Route::post('/events/store', 'store')->name('events.store');
+            Route::post('/events/update', 'update')->name('events.update');
+        });
+        Route::controller(UserValidationController::class)->group(function() {
+            Route::get('/events/{event}/validation', 'index')->name('user.validation');
+            Route::post('/events/{event}/validation/{user}/accept', 'accept')->name('user.validation.accept');
+            Route::post('/events/{event}/validation/{user}/decline', 'decline')->name('user.validation.decline');
         });
     });
     Route::middleware('admin')->group(function() {
@@ -66,7 +72,9 @@ Route::middleware('auth')->group(function () {
             Route::post('/dashboard/events/{event}/approve', 'approve')->name('admin.approve');
             Route::post('/dashboard/events/{event}/decline', 'decline')->name('admin.decline');
             Route::get('/dashboard/permissions', 'permissions')->name('admin.permissions');
+            Route::post('/dashboard/permissions/{user}/ban', 'ban')->name('admin.permissions.ban');
             Route::get('/dashboard/categories', 'categories')->name('admin.categories');
+            Route::get('/dashboard/statistics', 'statistics')->name('admin.statistics');
         });
         Route::controller(CategoryController::class)->group(function() {
             Route::post('/dashboard/categories/create', 'store')->name('admin.categories.create');

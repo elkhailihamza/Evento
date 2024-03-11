@@ -18,7 +18,7 @@ class CheckUserId
     {
         $event = $request->route('event');
         if (auth()->user()->id != $event->user_id) {
-            return redirect()->back(401);
+            return abort(403, 'Unauthorized');
         }
         return $next($request);
     }

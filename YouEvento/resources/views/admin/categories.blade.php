@@ -3,7 +3,7 @@
 @section('content')
 
 <section class="flex justify-center p-2.5 mt-5 mb-10">
-    <div class="w-1/2">
+    <div class="w-4/5 mt-10">
         <h3 class="text-3xl">Events:</h3>
     </div>
 </section>
@@ -49,7 +49,7 @@
                     <td class="px-6 py-3 border truncate">
                         {{$category->updated_at->diffForHumans()}}
                     </td>
-                    <td class="px-6 py-3 flex">
+                    <td class="px-6 py-3 flex justify-center">
                         <form method="post" action="{{route('admin.categories.destroy', $category)}}">
                             @csrf
                             @method('POST')

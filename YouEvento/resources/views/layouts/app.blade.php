@@ -13,11 +13,21 @@
 <body>
     @include('layouts.components.navbar')
     @can('viewOriganizerComponent', \App\Models\User::class)
-        @include('layouts.components.sidebar')
-        @vite('resources/js/organisateur/FetchCategoriesForSidebar.js')
-        @vite('resources/js/organisateur/FetchTickets.js')
-        @vite('resources/js/organisateur/FetchEvents.js')
+    @include('layouts.components.sidebar')
+    @vite('resources/js/organisateur/FetchCategoriesForSidebar.js')
+    @vite('resources/js/organisateur/FetchTickets.js')
+    @vite('resources/js/organisateur/FetchEvents.js')
     @endcan
+    @if(session('success'))
+    <div class="alert alert-success" id="alert">
+        {{ session('success') }}
+    </div>
+    @endif
+    @if(session('error'))
+    <div class="alert alert-danger" id="alert">
+        {{ session('error') }}
+    </div>
+    @endif
     @yield('content')
 </body>
 @vite('resources/js/Search.js')
