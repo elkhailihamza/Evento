@@ -48,7 +48,7 @@ Route::middleware(['auth', 'banned'])->group(function () {
         Route::get('/tickets/info/get', 'getTicketInfo');
         Route::post('/tickets/{event}/store', 'store')->name('tickets.store');
     });
-    Route::get('/ticket/download', [PDFController::class, 'generatePDF'])->name('tickets.download');
+    Route::post('/ticket/{reservation}/download', [PDFController::class, 'generatePDF'])->middleware('checkpdfuserticket')->name('tickets.download');
     Route::get('/categories/get', [CategoryController::class, 'getCategories']);
     Route::middleware('organisateur')->group(function () {
         Route::controller(EventController::class)->group(function () {
@@ -81,3 +81,4 @@ Route::middleware(['auth', 'banned'])->group(function () {
         });
     });
 });
+Route::get('/ticket/pdf', [PDFController::class, 'index']);

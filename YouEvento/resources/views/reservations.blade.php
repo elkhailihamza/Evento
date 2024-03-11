@@ -17,16 +17,20 @@
             <h2 class="truncate">Info: {{$reservation->info ?? 'No Info Given!'}}</h2>
             <h2 class="truncate">Ticket: {{$reservation->ticket->ticket_name}}</h2>
             <h2 class="truncate">Status:
-                @if ($reservation->status == 1)
-                Pending..
-                @else
+                @if ($reservation->status)
                 Confirmed!
+                @else
+                Pending..
                 @endif
             </h2>
             <p class="truncate">Reserved on: {{$reservation->created_at->diffForHumans()}}</p>
             <div class="flex justify-center mt-5">
                 @if ($reservation->status)
-                <a href="{{route('tickets.download')}}" class="bg-red-700 py-1 px-2 text-white ">Download!</a>
+                <form method="post" action="{{route('tickets.download', $reservation)}}">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="bg-red-700 py-1 px-2 text-white ">Download!</button>
+                </form>
                 @else
                 <a class="bg-black py-1 px-2 text-white">Awating..</a>
                 @endif
