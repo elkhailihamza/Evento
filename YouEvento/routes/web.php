@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ReservationController;
@@ -25,11 +26,18 @@ use Illuminate\Support\Facades\Route;
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'showLogin')->name('login');
     Route::get('/register', 'showRegister')->name('register');
-    Route::get('/forgotten', 'showForgotten')->name('forgotten');
-    Route::post('/forgotten/send', 'forgotten')->name('forgotten.send');
     Route::post('/login/send', 'login')->name('login.send');
     Route::post('/register/send', 'register')->name('register.send');
     Route::post('/logout', 'logout')->name('logout')->middleware('auth');
+});
+Route::controller(ForgotPasswordController::class)->group(function () {
+    // Route::get('/forgotten', 'showForgotten')->name('forgotten');
+    // Route::post('/forgotten/send', 'forgotten')->name('forgotten.send');
+
+    Route::get('/forgotten', 'showForgetPasswordForm')->name('forget.password.get');
+    Route::post('/forgotten', 'submitForgetPasswordForm')->name('forget.password.post');
+    Route::get('/forgotten/send/{token}', 'showResetPasswordForm')->name('reset.password.get');
+    Route::post('/forgotten/send/{token}', 'submitResetPasswordForm')->name('reset.password.post');
 });
 
 Route::middleware(['auth', 'banned'])->group(function () {
