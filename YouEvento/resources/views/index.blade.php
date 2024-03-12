@@ -6,7 +6,7 @@
     <div class="mt-20">
         <h1 class="text-[30px] font-medium">Latest Events:</h1>
     </div>
-    <div class="flex flex-col items-center">
+    <div class="flex justify-center gap-10 mt-10">
         @if (isset($events) && $events->isNotEmpty())
         @foreach ($events as $event)
         <div class="w-[300px] rounded-md border p-2">
@@ -22,7 +22,7 @@
         </div>
         @endforeach
         @else
-        <div class="text-center mt-20">
+        <div class="text-center">
             <h1 class="text-[20px]">No Current Events Can Be Found At The Moment!</h1>
         </div>
         @endif

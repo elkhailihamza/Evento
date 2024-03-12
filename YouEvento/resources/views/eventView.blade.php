@@ -7,15 +7,17 @@
         <a href="{{route('events')}}" class="text-[16px] w-20 opacity-50 hover:underline flex items-center"><svg class="mt-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M19 12H6M12 5l-7 7 7 7" />
             </svg><span>Go back</span></a>
-        <div class="flex flex-col-reverse items-center gap-2">
+        <div class="flex items-center gap-2">
             @if ($event->user_id == auth()->user()->id)
-            @if ($event->status == 0)
-            <span class="bg-black rounded py-1 px-2.5 text-white">Awating..</span>
-            @elseif ($event->status == 1)
-            <span class="bg-green-700 rounded py-1 px-2.5 text-white">Accepted!</span>
-            @elseif ($event->status == 2)
-            <span class="bg-red-700 rounded py-1 px-2.5 text-white">Declined!</span>
-            @endif
+            <div class="select-none">
+                @if ($event->status == 0)
+                <span class="bg-black rounded py-1 px-2.5 text-white">Awating..</span>
+                @elseif ($event->status == 1)
+                <span class="bg-green-700 rounded py-1 px-2.5 text-white">Accepted!</span>
+                @elseif ($event->status == 2)
+                <span class="bg-red-700 rounded py-1 px-2.5 text-white">Declined!</span>
+                @endif
+            </div>
             <button data-dropdown-toggle="event-menu" data-dropdown-target="event-menu" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                 </svg>
