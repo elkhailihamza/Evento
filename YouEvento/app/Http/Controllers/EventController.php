@@ -14,7 +14,7 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::join('tickets', 'events.id', '=', 'tickets.event_id')->select('events.*')->where('tickets.ticket_qnt', '>', 0)->where('status', 1)->whereNot('category_id', NULL)->groupBy('events.id')->paginate(6);
+        $events = Event::join('tickets', 'events.id', '=', 'tickets.event_id')->select('events.*')->where('tickets.ticket_qnt', '>', 0)->where('status', 1)->whereNot('category_id', NULL)->groupBy('events.id')->orderByDesc('created_at')->paginate(6);
         return view('events', compact('events'));
     }
     public function viewEvent(Event $event)
