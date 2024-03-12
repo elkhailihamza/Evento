@@ -15,7 +15,7 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <div class="p-4 w-full md:p-5 flex justify-around space-y-4">
+            <div class="p-4 w-full md:p-5 flex justify-around gap-5 space-y-4">
                 <div class="flex flex-col justify-center">
                     <img src="{{asset('storage/'.$event->cover)}}" alt="{{$event->title}} Img Cover">
                 </div>
