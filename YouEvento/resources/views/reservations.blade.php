@@ -7,6 +7,7 @@
     </div>
 </section>
 <section class="flex flex-wrap justify-center gap-5 mt-10 select-none">
+    @if ($reservations->isNotEmpty())
     @foreach ($reservations as $reservation)
     <div class="w-[350px] rounded-md border p-2">
         <div class="flex h-[300px] justify-center mb-3">
@@ -38,6 +39,12 @@
         </div>
     </div>
     @endforeach
+    @else
+        <div class="text-center mt-20">
+            <h1 class="text-[26px]">No Reservations made!</h1>
+            <a class="text-[18px] text-blue-600 hover:underline" href="{{route('events')}}">Explore</a>
+        </div>
+    @endif
 </section>
 
 @endsection

@@ -39,7 +39,7 @@
                     <td class="px-6 py-3 border">
                         {{$reservation->status ? 'Accepted' : 'Awating..'}}
                     </td>
-                    @if ($reservation->status)
+                    @if (!$reservation->status)
                     <td class="px-6 py-3 flex justify-center">
                         <form method="post" action="{{route('user.validation.decline', [$event, $reservation->user])}}">
                             @csrf

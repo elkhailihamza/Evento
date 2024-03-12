@@ -4,7 +4,7 @@
 
 <section class="flex justify-center p-2.5 mt-5 mb-10">
     <div class="w-4/5 mt-10">
-        <h3 class="text-3xl">Events:</h3>
+        <h3 class="text-3xl">Categories:</h3>
     </div>
 </section>
 
