@@ -1,1 +1,1 @@
-Tfo 3la mok!
+Banned!
