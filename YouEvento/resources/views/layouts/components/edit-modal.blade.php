@@ -7,7 +7,7 @@
                 <h3 class="text-xl font-semibold text-gray-900">
                     Edit Event: {{$event->title}}
                 </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="sidebar-create">
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="edit-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>
@@ -26,7 +26,7 @@
                                     <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z" />
                                     <path d="M14 3v5h5M12 18v-6M9 15h6" />
                                 </svg>
-                                <input name="cover" value="{{$event->cover}}" required type="file" id="cover" class="block sr-only text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-[#242526] dark:border-gray-600 dark:placeholder-gray-400">
+                                <input name="cover" value="{{$event->cover}}" type="file" id="cover" class="block sr-only text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-[#242526] dark:border-gray-600 dark:placeholder-gray-400">
                             </label>
                         </div>
                         <div class="mb-2 grid">
@@ -48,9 +48,9 @@
                             </div>
                         </div>
                         <div class="mb-2 grid">
-                            <label for="seats">Category</label>
-                            <select id="selectCategoryForEditModal" class="rounded-md p-2.5" required name="category">
-                                <option value="{{$event->category->category_id}}" hidden selected disabled>{{$event->category->category_name}}</option>
+                            <label for="selectCategoryEdit">Category</label>
+                            <select id="selectCategoryEdit" class="rounded-md p-2.5" required name="category">
+                                <option value="{{$event->category->category_id ?? null}}" hidden selected disabled>{{$event->category->category_name ?? 'Select a Category..'}}</option>
                             </select>
                         </div>
                         <div class="mb-2 grid">

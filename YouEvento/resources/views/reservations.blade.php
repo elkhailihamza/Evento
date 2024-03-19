@@ -7,10 +7,8 @@
     </div>
 </section>
 <section class="flex flex-wrap justify-center gap-5 mt-10 select-none">
+    @if ($reservations->isNotEmpty())
     @foreach ($reservations as $reservation)
-    <div class="flex justify-center items-center">
-        <h3 class="text-3xl"></h3>
-    </div>
     <div class="w-[350px] rounded-md border p-2">
         <div class="flex h-[300px] justify-center mb-3">
             <img src="{{ asset('storage/'.$reservation->ticket->event->cover) }}">
@@ -19,22 +17,34 @@
             <h2 class="truncate">Title: {{$reservation->ticket->event->title}}</h2>
             <h2 class="truncate">Info: {{$reservation->info ?? 'No Info Given!'}}</h2>
             <h2 class="truncate">Ticket: {{$reservation->ticket->ticket_name}}</h2>
-            <h2 class="truncate">Status: 
-                @if ($reservation->status == 1)
-                    Pending..
-                @else 
-                    Confirmed!
+            <h2 class="truncate">Status:
+                @if ($reservation->status)
+                Confirmed!
+                @else
+                Pending..
                 @endif
             </h2>
             <p class="truncate">Reserved on: {{$reservation->created_at->diffForHumans()}}</p>
-            @if ($reservation->status)
-                <div>
-
-                </div>
-            @endif
+            <div class="flex justify-center mt-5">
+                @if ($reservation->status)
+                <form method="post" action="{{route('tickets.download', $reservation)}}">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="bg-red-700 py-1 px-2 text-white ">Download!</button>
+                </form>
+                @else
+                <a class="bg-black py-1 px-2 text-white">Awating..</a>
+                @endif
+            </div>
         </div>
     </div>
     @endforeach
+    @else
+        <div class="text-center mt-20">
+            <h1 class="text-[26px]">No Reservations made!</h1>
+            <a class="text-[18px] text-blue-600 hover:underline" href="{{route('events')}}">Explore</a>
+        </div>
+    @endif
 </section>
 
 @endsection

@@ -30,8 +30,7 @@ class AuthController extends Controller
             return redirect()->intended(route('index'));
         }
 
-        return back()->withErrors([
-            'message' => 'login credentials error.',
+        return redirect()->back()->with([
             'error' => 'Email or Password Wrong!',
         ]);
     }
@@ -42,48 +41,23 @@ class AuthController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8|confirmed',
+                'role' => 'required|in:1,2',
             ]);
 
-            $data['role_id'] = 1;
+            $data['role_id'] = $request->input('role');
 
             User::create($data);
 
             return redirect(route('index'))->with(
                 [
-                    'message' => 'register creation success.',
                     'success' => 'Successfully made account!',
                 ]
             );
         } catch (ValidationException $e) {
-            return back()->with([
-                'message' => 'register creation error.',
+            return redirect()->back()->with([
                 'error' => $e->errors(),
             ]);
         }
-    }
-    public function showForgotten()
-    {
-        return view('auth.forgotten_password.forgot');
-    }
-    public function forgotten(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-        ]);
-
-        try {
-            $this->sendMail($request->input('email'));
-            return 'Email sent successfully!';
-        } catch (\Exception $e) {
-            return 'Error: ' . $e->getMessage();
-        }
-    }
-    public function sendMail($address)
-    {
-        $email = new ForgotPassMail();
-        Mail::to($address)->send($email);
-
-        return 'Email sent successfully!';
     }
     public function logout(Request $request)
     {
@@ -92,6 +66,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect(route('index'))->withSuccess('Successfully logged out!');
+        return redirect(route('index'))->with('success', 'Successfully logged out!');
     }
 }

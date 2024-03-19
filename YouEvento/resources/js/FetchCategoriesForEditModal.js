@@ -10,7 +10,7 @@ function getCategories() {
         return;
     }
 
-    var event = $('#modalEdit').attr('data-post-id');
+    var event = $("#modalEdit").attr("data-event-id");
 
     $.ajax({
         url: "/categories/get",
@@ -20,7 +20,7 @@ function getCategories() {
         },
         success: function (data) {
             fetched.set('true');
-            $('#selectCategoryForEditModal').html(data);
+            $('#selectCategoryEdit').html(data);
         },
         error: function (error) {
             console.log(error);

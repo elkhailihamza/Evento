@@ -15,7 +15,8 @@ function getCategories() {
         type: "GET",
         success: function (data) {
             sent.set('true');
-            $('#selectCategoryForSidebar').html(data);
+            console.log(data);
+            $('#selectCategoryCreate').html(data);
         },
         error: function (error) {
             console.log(error);

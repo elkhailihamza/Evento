@@ -15,8 +15,8 @@ class Organisateur
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && auth()->user()->role_id != 2) {
-            return redirect()->back()->with('error', 'Unauthorized');
+        if (auth()->user()->role_id != 2) {
+            return abort(403, 'Unauthorized');
         }
         return $next($request);
     }

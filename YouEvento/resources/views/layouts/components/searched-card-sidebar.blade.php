@@ -7,6 +7,7 @@
         <div>
             <h2 class="truncate">Title: {{$event->title}}</h2>
             <p class="truncate">Created: {{$event->created_at->diffForHumans()}}</p>
+            <p class="truncate">Validation: {{$event->automated ? 'True' : 'False'}}</p>
         </div>
     </a>
 </div>

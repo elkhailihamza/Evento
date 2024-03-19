@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#getEvents").on("click", fetchCategories);
+    $("").on("click", fetchCategories);
 });
 
 var fetchedEvents = new Map();
@@ -15,6 +15,7 @@ function fetchCategories() {
         type: "GET",
         success: function (data) {
             fetchedEvents.set("true");
+            console.log(data);
             $("#events").html(data);
         },
         error: function (error) {

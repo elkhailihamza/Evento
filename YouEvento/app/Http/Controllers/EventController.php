@@ -14,12 +14,24 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::join('tickets', 'events.id', '=', 'tickets.event_id')->select('events.*')->where('tickets.ticket_qnt', '>', 0)->groupBy('events.id')->paginate(6);
+        $events = Event::join('tickets', 'events.id', '=', 'tickets.event_id')->select('events.*')->where('tickets.ticket_qnt', '>', 0)->where('status', 1)->whereNot('category_id', NULL)->groupBy('events.id')->orderByDesc('created_at')->paginate(6);
         return view('events', compact('events'));
     }
     public function viewEvent(Event $event)
     {
         return view('eventView', ['event' => $event]);
+    }
+    public function viewStatistics(Event $event)
+    {
+        return view('statistics', compact('event'));
+    }
+    public function find($event)
+    {
+        $found = Reservation::join('tickets', 'tickets.id', '=', 'reservations.ticket_id')
+            ->where('reservations.user_id', auth()->user()->id)
+            ->where('tickets.event_id', $event->id)
+            ->first();
+        return $found;
     }
     public function RequestValidate($request, $event = null)
     {
@@ -30,10 +42,10 @@ class EventController extends Controller
                 'cover' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'location' => 'required|string|max:255',
                 'date' => 'required|date_format:Y-m-d\TH:i',
-                'validation' => 'required|boolean'
+                'validation' => 'required|boolean',
             ]);
 
-            if ($event->cover && file_exists(storage_path('app/public/' . $event->cover))) {
+            if ($event && file_exists(storage_path('app/public/' . $event->cover))) {
                 unlink(storage_path('app/public/' . $event->cover));
             }
 
@@ -42,6 +54,7 @@ class EventController extends Controller
             $data['category_id'] = $request->input('category');
             $data['cover'] = $imagePath;
             $data['automated'] = $request->input('validation');
+            $data['user_id'] = auth()->user()->id;
 
             return $data;
         } catch (ValidationException $e) {
@@ -51,18 +64,27 @@ class EventController extends Controller
             ]);
         }
     }
-    public function store(Request $request)
+    public function store(Request $request, Event $event)
     {
-        $data = $this->RequestValidate($request);
-        $data['user_id'] = auth()->user()->id;
-        $event = Event::create($data);
-        return redirect(route('viewEvent', ['event' => $event]));
+        $found = $this->find($event);
+        if (!$found) {
+            $data = $this->RequestValidate($request);
+            $event = Event::create($data);
+            return redirect(route('viewEvent', ['event' => $event]));
+        } else {
+            return redirect()->back()->with('error', 'Already made a reservation!');
+        }
     }
     public function update(Request $request, Event $event)
     {
-        $data = $this->RequestValidate($request);
-        $event->update($data);
-        return redirect(route('viewEvent', ['event' => $event]));
+        $found = $this->find($event);
+        if ($found) {
+            $data = $this->RequestValidate($request);
+            $event->update($data);
+            return redirect(route('viewEvent', ['event' => $event]));
+        } else {
+            return redirect()->back()->with('error', 'Event or Reservation Not Found!');
+        }
     }
     public function getEvents()
     {
@@ -91,16 +113,13 @@ class EventController extends Controller
                     break;
                 case 2:
                     $categories = Category::select('id', 'category_name')->where('category_name', 'like', '%' . $searchValue . '%')->get();
-                    foreach ($categories as $category) :
-                        $events[$category->category_name] = Event::where('category_id', $category->id)->get();
-                    endforeach;
                     break;
                 default:
                     return response()->json([
                         'error' => 'Not Found!'
                     ]);
             }
-            return view('layouts.components.searched-card', ['events' => $events]);
+            return view('layouts.components.searched-card', ['events' => $events ?? null, 'categories' => $categories ?? null]);
         } catch (ValidationException $e) {
             return response()->json([
                 'error' => $e->errors(),
