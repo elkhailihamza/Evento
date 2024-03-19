@@ -28,7 +28,6 @@ function fetchTickets() {
 }
 
 function fetchSelect() {
-    console.log("changed");
     var ticket = $("#selectTickets").val();
     $.ajax({
         url: "/tickets/info/get",
@@ -37,7 +36,6 @@ function fetchSelect() {
             ticket,
         },
         success: function (data) {
-            console.log(data);
             $("#ticketSection").html(data);
             $("#reserve").removeClass("hidden");
         },

@@ -2,7 +2,7 @@
 
 @section('content')
 <section>
-    <form method="post" action="{{route('forgotten.send')}}">
+    <form method="post" action="{{ route('forget.password.post') }}">
         @csrf
         @method('POST')
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -17,7 +17,7 @@
                     <h1 class="text-xl text-dark font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                         Find Your Account
                     </h1>
-                    <p>Please enter a valid email address to find your account!</p>
+                    <p>Please enter a valid email address to reset password!</p>
                     <div>
                         <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Email" required="">
                     </div>

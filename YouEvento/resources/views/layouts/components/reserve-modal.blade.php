@@ -26,10 +26,14 @@
                             </select>
                         </div>
                         <div class="flex justify-center">
-                            @if ($event->status == 1)
+                            @if ($ticket->tickets_left > 0)
+                            @if ($event->automated == 1)
                             <button id="reserve" type="submit" class="p-2.5 hidden bg-blue-700 text-white rounded">Reserve</button>
                             @else
                             <button id="reserve" type="submit" class="p-2.5 hidden bg-green-700 text-white rounded">Request</button>
+                            @endif
+                            @else
+                            <h1>Sold Out!</h1>
                             @endif
                         </div>
                     </div>

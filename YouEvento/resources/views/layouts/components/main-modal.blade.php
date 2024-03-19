@@ -54,8 +54,8 @@
                             </div>
                         </div>
                         <div class="mb-2 grid">
-                            <label for="seats">Category</label>
-                            <select id="selectCategory" class="rounded-md p-2.5" required name="category">
+                            <label for="selectCategoryCreate">Category</label>
+                            <select id="selectCategoryCreate" class="rounded-md p-2.5" required name="category">
                                 <option value="null" hidden selected disabled>Select Category</option>
                             </select>
                         </div>
